@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Grid, Form, Dropdown, Input, Label } from 'semantic-ui-react';
+import React, {useEffect, useState} from 'react';
+import {Dropdown, Form, Grid, Input, Label} from 'semantic-ui-react';
 
-import { useSubstrate } from './substrate-lib';
-import { TxButton, TxGroupButton } from './substrate-lib/components';
+import {useSubstrate} from './substrate-lib';
+import {TxButton, TxGroupButton} from './substrate-lib/components';
 
 const argIsOptional = (arg) =>
   arg.type.toString().startsWith('Option<');
@@ -219,6 +219,12 @@ function Main (props) {
               state={{ ind, paramField }}
               value={ inputParams[ind] ? inputParams[ind].value : '' }
               onChange={onPalletCallableParamChange}
+            />
+            <Label
+                basic
+                pointing
+                color='teal'
+                content = { `input hex value( e.g., ${api.registry.createType(paramField.type).toHex()} for ${api.registry.createType(paramField.type).toString()} )`}
             />
             { paramField.optional
               ? <Label
