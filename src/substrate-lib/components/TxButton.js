@@ -154,6 +154,21 @@ function TxButton ({
     (isConstant() && constant());
   };
 
+  const isJSON = (str) => {
+      if (typeof str == 'string') {
+          try {
+              var obj=JSON.parse(str);
+              if(typeof obj == 'object' && obj ){
+                  return true;
+              }else{
+                  return false;
+              }
+          } catch(e) {
+              return false;
+          }
+      }
+  }
+
   const transformParams = (paramFields, inputParams, opts = { emptyAsNull: true }) => {
     // if `opts.emptyAsNull` is true, empty param value will be added to res as `null`.
     //   Otherwise, it will not be added
@@ -172,6 +187,11 @@ function TxButton ({
       if (value == null || value === '') return (opts.emptyAsNull ? [...memo, null] : memo);
 
       let converted = value;
+
+      if( isJSON(value) ) {
+        converted = api.registry.createType(type, JSON.parse(value)).toHex();
+        return [...memo, converted];
+      }
 
       // Deal with a vector
       if (type.indexOf('Vec<') >= 0) {

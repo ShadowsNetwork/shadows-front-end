@@ -168,13 +168,13 @@ function Main (props) {
             checked={interxType === 'QUERY'}
             onChange={onInterxTypeChange}
           />
-          <Form.Radio
-            label='RPC'
-            name='interxType'
-            value='RPC'
-            checked={interxType === 'RPC'}
-            onChange={onInterxTypeChange}
-          />
+          {/*<Form.Radio*/}
+          {/*  label='RPC'*/}
+          {/*  name='interxType'*/}
+          {/*  value='RPC'*/}
+          {/*  checked={interxType === 'RPC'}*/}
+          {/*  onChange={onInterxTypeChange}*/}
+          {/*/>*/}
           <Form.Radio
             label='Constant'
             name='interxType'
@@ -185,9 +185,9 @@ function Main (props) {
         </Form.Group>
         <Form.Field>
           <Dropdown
-            placeholder='Pallets / RPC'
+            placeholder='Pallets'
             fluid
-            label='Pallet / RPC'
+            label='Pallet'
             onChange={onPalletCallableParamChange}
             search
             selection
@@ -224,7 +224,7 @@ function Main (props) {
                 basic
                 pointing
                 color='teal'
-                content = { `input hex value( e.g., ${api.registry.createType(paramField.type).toHex()} for ${api.registry.createType(paramField.type).toString()} )`}
+                content = { `input plain text or hex value, e.g.  ${api.registry.createType(paramField.type).toString()}  or   ${api.registry.createType(paramField.type).toHex()}`}
             />
             { paramField.optional
               ? <Label
